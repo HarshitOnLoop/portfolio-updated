@@ -1,53 +1,210 @@
-.header-shell {
+.profile {
+  --banner-h: 180px;
+  --slot-w: 180px;
+  --slot-h: 300px;
+  --font-mono: var(--font-ui);
+
   position: relative;
-  width: 100%;
-  height: clamp(480px, 75vh, 600px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: -150px;
-  z-index: 0;
-  overflow: hidden;
 }
 
-.lanyard {
+/* ---------- Banner ---------- */
+.banner {
   position: relative;
-  width: 420px;
-  height: 520px;
-  transform: translate(-450px, 70px);
+  height: var(--banner-h);
   overflow: hidden;
-  z-index: 0;
+  background: linear-gradient(120deg, #3b82c4 0%, #f08a3c 55%, #d9b77a 100%);
 }
 
-.lanyard-canvas {
+.banner::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.banner img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.lanyard-motion-controls {
-  display: none;
+.banner-caption {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 18px;
+  color: #26262b;
+  background: rgba(255, 255, 251, 0.85);
+  backdrop-filter: blur(4px);
 }
 
-@media (max-width: 768px) {
-  .header-shell {
-    height: clamp(420px, 68vh, 560px);
-    margin-top: -110px;
+/* ---------- Lanyard ---------- */
+.profile-hero {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: var(--slot-h);
+}
+
+.lanyard-slot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--slot-w);
+  height: var(--slot-h);
+}
+
+.profile-intro {
+  position: absolute;
+  top: calc(var(--banner-h) + 8px);
+  left: calc(var(--slot-w) + 4px);
+  min-width: 0;
+  margin-top: 5px;
+}
+
+.lanyard-motion-controls {
+  display: none; /* phone-tilt helper: shown on mobile only */
+}
+
+/* ---------- Text ---------- */
+.profile-body {
+  margin-top: calc(var(--slot-h) - var(--banner-h));
+  padding: 0 20px 32px;
+  text-align: left;
+}
+
+.profile-name {
+  margin: 0;
+  font-family: var(--font-logo);
+  font-size: 44px;
+  line-height: 48px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+}
+
+.profile-tagline {
+  margin: 4px 0 0;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: #404040;
+}
+
+.profile-info {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  column-gap: 60px;
+  row-gap: 5px;
+  width: fit-content;
+  margin: 20px 0 24px;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.profile-info li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.profile-info svg {
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.profile-info span,
+.profile-info a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #404040;
+  text-decoration: none;
+}
+
+.profile-info a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Pill buttons ---------- */
+.profile-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 9px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #404040;
+  text-decoration: none;
+  border: 0.5px solid var(--line);
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.pill:hover {
+  background: var(--hover-bg);
+}
+
+.pill:focus-visible {
+  outline: 2px solid #0969da;
+  outline-offset: 2px;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 640px) {
+  .profile {
+    --banner-h: 140px;
+    --slot-w: 132px;
+    --slot-h: 230px;
   }
 
-  .lanyard {
-    width: min(420px, calc(100vw - 24px));
-    height: min(520px, 68vh);
-    transform: translateY(24px);
+  .profile-intro {
+    top: calc(var(--banner-h) + 8px);
+    left: calc(var(--slot-w) + 8px);
+  }
+
+  .profile-body {
+    margin-top: calc(var(--slot-h) - var(--banner-h));
+    padding: 0 16px 28px;
+  }
+
+  .profile-name {
+    font-size: clamp(24px, 7vw, 30px);
+  }
+
+  .profile-info {
+    gap:20;
+    font-size: 13px;
+  }
+
+  .pill {
+    padding: 5px 7px;
+    font-size: 11px;
   }
 
   .lanyard-motion-controls {
     position: absolute;
     z-index: 2;
     top: 10px;
-    right: 10px;
     left: 10px;
+    right: 10px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -57,35 +214,18 @@
 
   .lanyard-motion-controls button,
   .lanyard-motion-controls span {
-    border: 1px solid rgba(31, 35, 40, 0.16);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.94);
-    color: #24292f;
+    padding: 8px 10px;
     font: inherit;
     font-size: 12px;
+    color: #24292f;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(31, 35, 40, 0.16);
+    border-radius: 8px;
     box-shadow: 0 2px 8px rgba(31, 35, 40, 0.12);
     pointer-events: auto;
   }
 
   .lanyard-motion-controls button {
-    padding: 8px 10px;
     cursor: pointer;
-  }
-
-  .lanyard-motion-controls span {
-    max-width: min(300px, 100%);
-    padding: 8px 10px;
-    text-align: right;
-  }
-}
-
-@media (max-width: 380px) {
-  .header-shell {
-    height: 420px;
-  }
-
-  .lanyard {
-    height: 390px;
-    transform: translateY(18px);
   }
 }
