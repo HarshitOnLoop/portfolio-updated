@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 import "./App.css";
 import Header from "./Header";
 import About from "./About/About";
-
-// import About from "./components/About";
-// import Skills from "./components/Skills";
-// ...import your own section components here
+import AboutPage from "./About/AboutPage/AboutPage";
+import { SmoothCursor } from "./components/velora/smooth-cursor";
+import Experience from "./Experience/experience";
 
 const links = [
   { name: "about", href: "#about" },
@@ -58,6 +60,7 @@ const SoundOffIcon = () => (
 
 /* ---------- Navbar ---------- */
 function Navbar() {
+  const location = useLocation();
   const [active, setActive] = useState("");
   const [theme, setTheme] = useState(() => {
     try {
@@ -69,6 +72,7 @@ function Navbar() {
       : "light";
   });
   const [soundOn, setSoundOn] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // Apply theme to <html> so CSS variables switch everywhere
   useEffect(() => {
@@ -96,25 +100,41 @@ function Navbar() {
 
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
-  }, []);
+  }, [location.pathname]);
 
   return (
     <header className="navbar">
-      <a href="#" className="nav-logo" aria-label="Back to top">
+      <Link
+        to={location.pathname === "/" ? "#home" : "/#home"}
+        className="nav-logo"
+        aria-label="Back to home"
+      >
         h.
-      </a>
+      </Link>
 
-      <nav className="nav-links" aria-label="Main">
-        {links.map((link) => (
-          <a
-            key={link.name}
-            href={link.href}
-            className={`nav-link ${active === link.href ? "active" : ""}`}
-            onClick={() => setActive(link.href)}
-          >
-            {link.name}
-          </a>
-        ))}
+      <nav
+        id="main-nav"
+        className={`nav-links${menuOpen ? " is-open" : ""}`}
+        aria-label="Main"
+      >
+        {links.map((link) => {
+          const to =
+            location.pathname === "/" ? link.href : `/${link.href}`;
+
+          return (
+            <Link
+              key={link.name}
+              to={to}
+              className={`nav-link ${active === link.href ? "active" : ""}`}
+              onClick={() => {
+                setActive(link.href);
+                setMenuOpen(false);
+              }}
+            >
+              {link.name}
+            </Link>
+          );
+        })}
       </nav>
 
       <div className="nav-actions">
@@ -134,6 +154,23 @@ function Navbar() {
         >
           {theme === "light" ? <SunIcon /> : <MoonIcon />}
         </button>
+        <button
+          className="icon-btn menu-toggle"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={menuOpen}
+          aria-controls="main-nav"
+        >
+          <svg {...iconProps}>
+            <path
+              d={
+                menuOpen
+                  ? "M6 6l12 12M18 6 6 18"
+                  : "M4 6h16M4 12h16M4 18h16"
+              }
+            />
+          </svg>
+        </button>
       </div>
     </header>
   );
@@ -141,12 +178,57 @@ function Navbar() {
 
 /* ---------- App ---------- */
 export default function App() {
+  const location = useLocation();
+  const lenisRef = useRef(null);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      autoRaf: true,
+      smoothWheel: true,
+      respectReducedMotion: true,
+    });
+    lenisRef.current = lenis;
+
+    return () => {
+      lenisRef.current = null;
+      lenis.destroy();
+    };
+  }, []);
+
+  useEffect(() => {
+    const lenis = lenisRef.current;
+    if (!lenis) return;
+
+    if (location.hash) {
+      const target = document.getElementById(location.hash.slice(1));
+      if (target) {
+        lenis.scrollTo(target, { offset: -222 });
+        return;
+      }
+    }
+
+    lenis.scrollTo(0, { immediate: true });
+  }, [location.hash, location.pathname]);
+
   return (
     <div className="frame">
+      <SmoothCursor />
       <Navbar />
 
-      <Header />
-      <About />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Header />
+              <About />
+              <Experience />
+            </>
+          }
+        />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
 
       {/* Add your other imported components here, e.g.
           <Hero />

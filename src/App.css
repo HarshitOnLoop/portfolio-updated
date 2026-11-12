@@ -26,8 +26,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 72px; /* keeps section headings clear of the sticky navbar */
+  scroll-padding-top: 222px; /* keeps section headings clear of the sticky navbar */
 }
 
 body {
@@ -151,9 +150,6 @@ body {
   color: var(--text-color);
 }
 
-.nav-link:hover {
-  background: var(--hover-bg);
-}
 
 .nav-actions {
   display: flex;
@@ -182,6 +178,10 @@ body {
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
+.menu-toggle {
+  display: none;
+}
+
 .icon-btn:hover {
   color: var(--text-color);
   background: var(--hover-bg);
@@ -198,33 +198,104 @@ body {
 
 @media (max-width: 640px) {
   .navbar {
-    height: auto;
-    flex-wrap: wrap;
-    padding: 8px 14px 0;
-    row-gap: 0;
+    height: 48px;
+    flex-wrap: nowrap;
+    gap: 4px;
+    padding: 0 8px;
   }
 
   .nav-logo {
     order: 1;
+    flex-shrink: 0;
   }
 
   .nav-actions {
-    order: 2;
-    margin-left: auto;
-  }
-
-  /* Links drop to a second, horizontally scrollable row */
-  .nav-links {
     order: 3;
-    width: 100%;
-    margin: 4px -4px 0;
-    padding-bottom: 6px;
-    overflow-x: auto;
-    scrollbar-width: none;
+    flex-shrink: 0;
+    gap: 0;
   }
 
-  .nav-links::-webkit-scrollbar {
-    display: none;
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
+    background: var(--bg);
+    transition: max-height 450ms ease-in-out, opacity 350ms ease,
+      transform 450ms ease-in-out, padding 450ms ease-in-out,
+      visibility 0s linear 450ms;
+  }
+
+  .nav-links::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 100vw;
+    height: var(--dot-size);
+    transform: translateX(-50%);
+    background-image: radial-gradient(circle closest-side, var(--line) 95%, transparent 100%);
+    background-size: calc(var(--dot-size) + var(--dot-gap)) var(--dot-size);
+    background-repeat: repeat-x;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 350ms ease;
+  }
+
+  .nav-links.is-open {
+    max-height: 280px;
+    padding: 8px 12px;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition: max-height 450ms ease-in-out, opacity 350ms ease,
+      transform 450ms ease-in-out, padding 450ms ease-in-out;
+  }
+
+  .nav-links.is-open::after {
+    opacity: 1;
+  }
+
+  .nav-link {
+    padding: 8px 10px;
+    font-size: 12px;
+    border-radius: 0;
+  }
+
+  .nav-link + .nav-link {
+    border-top: 1px dotted var(--line);
+  }
+
+  .nav-sep {
+    margin-right: 2px;
+  }
+
+  .icon-btn {
+    width: 24px;
+    height: 24px;
+  }
+
+  .icon-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .menu-toggle {
+    display: grid;
   }
 }
 
@@ -247,10 +318,13 @@ body {
   background-position: 10px 10px;
   padding: 0 32px;
 }
-
+.menu-toggle:hover,
+.menu-toggle:active {
+  background: transparent;
+}
 .section-title {
   margin: 0;
-  padding: 22px 32px;
+  padding: 10px 32px;
   font-family: var(--font-logo);
   font-size: 40px;
   line-height: 44px;
@@ -264,7 +338,7 @@ body {
 
 @media (max-width: 640px) {
   .section-title {
-    padding: 18px 16px;
+    padding: 10px 16px;
     font-size: 34px;
     line-height: 38px;
   }
@@ -273,8 +347,4 @@ body {
     padding: 24px 16px 32px;
   }
 
-  .section-body p {
-    font-size: 14px;
-    line-height: 28px;
-  }
 }

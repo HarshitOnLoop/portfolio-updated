@@ -1,8 +1,9 @@
 import "./About.css";
+import { Link } from "react-router-dom";
 
 const paragraphs = [
-  "write a short intro about what you do, how long you have been doing it and the kind of products you have worked on.",
-  "then say what you care about, how you like to work with a team, and what people can expect when they work with you.",
+"lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, ",
+"lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.",
 ];
 
 export default function About() {
@@ -19,9 +20,9 @@ export default function About() {
           <p key={i}>{text}</p>
         ))}
 
-        <a href="#" className="more-link">
+        <Link to="/about" className="more-link">
           more about me <span aria-hidden="true">›</span>
-        </a>
+        </Link>
       </div>
 
       <div className="divider" aria-hidden="true" />

@@ -15,6 +15,9 @@
   background: linear-gradient(120deg, #3b82c4 0%, #f08a3c 55%, #d9b77a 100%);
 }
 
+.profile-name{
+  color:black;
+}
 .banner::after {
   content: "";
   position: absolute;
@@ -65,7 +68,7 @@
 
 .profile-intro {
   position: absolute;
-  top: calc(var(--banner-h) + 8px);
+  top: calc(var(--banner-h) - 4px);
   left: calc(var(--slot-w) + 4px);
   min-width: 0;
   margin-top: 5px;
@@ -78,38 +81,42 @@
 /* ---------- Text ---------- */
 .profile-body {
   margin-top: calc(var(--slot-h) - var(--banner-h));
-  padding: 0 20px 32px;
+  padding: 0 20px 42px;
   text-align: left;
 }
 
 .profile-name {
-  margin: 0;
+
   font-family: var(--font-logo);
   font-size: 44px;
-  line-height: 48px;
   font-weight: 400;
+  margin-bottom: 16px;
   letter-spacing: -0.5px;
 }
 
 .profile-tagline {
-  margin: 4px 0 0;
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  color: #404040;
+  margin-top: 0px;
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #737373;
 }
 
 .profile-info {
-  display: grid;
-  grid-template-columns: max-content max-content;
-  column-gap: 60px;
-  row-gap: 5px;
-  width: fit-content;
-  margin: 20px 0 24px;
-  padding: 0;
-  list-style: none;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 400;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 100px;
+    row-gap: 5px;
+    width: fit-content;
+    margin: 20px 0 24px;
+    padding: 0;
+    list-style: none;
+    font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #404040;
 }
 
 .profile-info li {
@@ -137,7 +144,6 @@
   text-decoration: underline;
 }
 
-/* ---------- Pill buttons ---------- */
 .profile-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -176,21 +182,27 @@
   }
 
   .profile-intro {
-    top: calc(var(--banner-h) + 8px);
-    left: calc(var(--slot-w) + 8px);
+    top: calc(var(--slot-h) - 18px);
+    left: 16px;
+    right: 16px;
+    margin-top: 0;
   }
 
   .profile-body {
-    margin-top: calc(var(--slot-h) - var(--banner-h));
+    margin-top: calc(var(--slot-h) - var(--banner-h) + 70px);
     padding: 0 16px 28px;
   }
 
   .profile-name {
-    font-size: clamp(24px, 7vw, 30px);
+    font-size: clamp(28px, 8vw, 36px);
   }
 
   .profile-info {
-    gap:20;
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    margin-top: 0;
+    padding-top: 0;
+    row-gap: 5px;
     font-size: 13px;
   }
 

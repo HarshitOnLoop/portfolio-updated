@@ -1,0 +1,45 @@
+[data-smooth-cursor],
+[data-smooth-cursor] * {
+  cursor: none !important;
+}
+
+.smooth-cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.smooth-cursor-position {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.smooth-cursor-ring {
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+  border: 1.5px solid var(--text-muted);
+  border-radius: 50%;
+  background: transparent;
+  transition: background-color 200ms ease;
+}
+
+.smooth-cursor-ring.is-hovering {
+  background: var(--hover-bg);
+}
+
+.smooth-cursor-dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: var(--text-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smooth-cursor-ring {
+    transition: none;
+  }
+}

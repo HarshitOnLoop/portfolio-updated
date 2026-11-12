@@ -4,8 +4,8 @@ import "./Header.css";
 
 /* ---------- Your content: edit these ---------- */
 const profile = {
-  name: "harshit Sharma",
-  tagline: "your tagline goes here",
+  name: "Your Name",
+  tagline: "Frontend Developer with an artist’s eye",
   role: "Frontend Developer",
   location: "Chandigarh, India",
   email: "harshitonloop@gmail.com",
