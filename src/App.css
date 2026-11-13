@@ -15,8 +15,8 @@
 
 :root[data-theme="dark"] {
   --bg: #141416;
-  --text-color: #ececf0;
-  --text-muted: #8c8c94;
+  --text-color: #4b4b4b;
+  --text-muted: #000000;
   --line: #3b3b42;
   --hover-bg: rgba(255, 255, 255, 0.08);
 }

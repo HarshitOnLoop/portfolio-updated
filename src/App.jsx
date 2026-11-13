@@ -8,7 +8,7 @@ import About from "./About/About";
 import AboutPage from "./About/AboutPage/AboutPage";
 import { SmoothCursor } from "./components/velora/smooth-cursor";
 import Experience from "./Experience/experience";
-
+import ExperiencePage from "./Experience/Experiencepage/Experiencepage";
 const links = [
   { name: "about", href: "#about" },
   { name: "skills", href: "#skills" },
@@ -227,13 +227,11 @@ export default function App() {
           }
         />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/experience" element={<ExperiencePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
-      {/* Add your other imported components here, e.g.
-          <Hero />
-          <About />
-          <Skills /> */}
+    
     </div>
   );
 }

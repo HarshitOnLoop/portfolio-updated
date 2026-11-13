@@ -1,5 +1,5 @@
 import "./experience.css";
-
+import { Link } from "react-router-dom";
 export default function Experience() {
   const experienceData = [
     {
@@ -52,6 +52,9 @@ export default function Experience() {
               </div>
             </article>
           ))}
+          <Link to="/experience" className="view-more-link">
+            View More <span aria-hidden="true">›</span>
+          </Link>
         </div>
       </section>
     </>
