@@ -5,20 +5,19 @@ const sections = [
   {
     number: "01",
     title: "What I do",
-    text: "I enjoy bringing ideas to life through thoughtful interface design and frontend development. From the first layout to the final details, I aim to make each experience clear, responsive, and easy to use.",
+    text: "I build responsive, accessible interfaces with React, TypeScript, and Tailwind CSS. From the first layout to the final hover state, I aim for work that looks sharp, loads fast, and feels easy to use on any screen.",
   },
   {
     number: "02",
     title: "How I work",
-    text: "I like to understand the problem before reaching for a solution. I value accessible interactions, readable code, and the small visual details that help a product feel cohesive.",
+    text: "I like to understand the problem before reaching for a solution. I ask questions, build in small steps, and value readable code, accessible interactions, and the small visual details that make a product feel cohesive.",
   },
   {
     number: "03",
     title: "Beyond the screen",
-    text: "Art, architecture, music, and everyday observations all offer a fresh perspective. I enjoy finding ways to bring that curiosity into the digital experiences I create.",
+    text: "Art, architecture, and music shape how I think about rhythm, balance, and proportion. I try to bring that same curiosity into every interface I build, and I'm always learning something new.",
   },
 ];
-
 export default function AboutPage() {
   return (
     <main id="about" className="about-page">

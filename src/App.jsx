@@ -7,8 +7,11 @@ import Header from "./Header";
 import About from "./About/About";
 import AboutPage from "./About/AboutPage/AboutPage";
 import { SmoothCursor } from "./components/velora/smooth-cursor";
+import Skills from "./Skills/skills";
 import Experience from "./Experience/experience";
 import ExperiencePage from "./Experience/Experiencepage/Experiencepage";
+import Projects from "./Projects/projects";
+import ProjectsPage from "./Projects/ProjectsPage/ProjectsPage";
 const links = [
   { name: "about", href: "#about" },
   { name: "skills", href: "#skills" },
@@ -222,12 +225,15 @@ export default function App() {
             <>
               <Header />
               <About />
+              <Skills />
+              <Projects />
               <Experience />
             </>
           }
         />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/experience" element={<ExperiencePage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 

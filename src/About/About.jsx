@@ -2,8 +2,8 @@ import "./About.css";
 import { Link } from "react-router-dom";
 
 const paragraphs = [
-"lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, ",
-"lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.",
+  "I'm Harshit, a frontend developer from Chandigarh who turns design ideas into fast, clean, thoughtful web experiences.",
+  "I see code as another kind of art. I build responsive interfaces with React, TypeScript, and Tailwind, sweat the small details, and back it up with Node.js and MongoDB. I'm currently a Frontend Developer Intern at Tech Arch Software, learning and shipping.",
 ];
 
 export default function About() {

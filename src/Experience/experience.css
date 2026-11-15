@@ -18,6 +18,21 @@
   gap: 24px;
 }
 
+.experience-item-company {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.experience-icon {
+  display: block;
+  width: 50px;
+  height: 50px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
 .section-description {
   margin: 0;
   padding: 0;
@@ -40,6 +55,20 @@
   margin: 0;
 }
 
+.section-left {
+  gap: 4px;
+}
+
+.section-left-text,
+.section-left-subtext {
+  font-weight: 600;
+}
+
+.section-right {
+  align-items: flex-end;
+  text-align: right;
+}
+
 /* shared text base */
 .section-left-text,
 .section-left-subtext,
@@ -56,12 +85,19 @@
 
 /* differences only */
 .section-left-text {
-  font-size: 16px;
-  line-height: 10px;
+  color: #26262b;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.1px;
 }
 
 .section-left-subtext {
-  margin-top: 10px;
+  margin: 0;
+  font-size: 15px;
+  line-height: 20px;
 }
 
 .section-right-subtext {
